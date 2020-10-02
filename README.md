@@ -539,7 +539,7 @@ To check if tests are passing, run `python ./manage.py test`
   }
 }
 ```
-**GET** `api/v1/lessons/:lesson_id/students/:student_id/` get score specific score and moood for a student from a lesson.  
+**GET** `api/v1/lessons/:lesson_id/students/:student_id/` get score specific score and mood for a student from a lesson.  
 
  *Response*
 
