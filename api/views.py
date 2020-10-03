@@ -30,8 +30,9 @@ class TeacherStudent(APIView):
   parser_classes=[JSONParser]
 
   def get(self, request, pk):
-    teacher = Teacher.objects.get(pk=pk)
-    return Response(StudentSerializer(teacher.student_set, many=True).data)
+    students = Student.ranked_by_average_score(pk)
+
+    return Response(StudentSerializer(students, many=True).data)
 
   def post(self, request, pk):
     teacher = Teacher.objects.get(pk=pk)
