@@ -26,6 +26,10 @@ class Student(models.Model):
   def full_name(self):
     return str(f'{self.first_name} {self.last_name}')
 
+  def ranked_by_average_score():
+    return Student.objects.annotate(average_score=Avg('lessonstudent__score')).order_by('-average_score')
+
+
 class Lesson(models.Model):
   name = models.CharField(max_length=100)
   description = models.CharField(max_length=100)
@@ -73,3 +77,4 @@ class Answer(models.Model):
 
   def __str__(self):
     return self.answer
+
