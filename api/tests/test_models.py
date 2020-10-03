@@ -83,8 +83,8 @@ class LessonStudentModelTest(TestCase):
     self.answer7 = self.question4.answer_set.create(answer='answer3', correct=True)
     self.answer8 = self.question4.answer_set.create(answer='answer4', correct=False)
 
-    self.student1 = StudentFactory()
-    self.student2 = StudentFactory()
+    self.student1 = StudentFactory(teacher=self.teacher1)
+    self.student2 = StudentFactory(teacher=self.teacher1)
 
     self.lessonStudent1 = self.student1.lessonstudent_set.create(lesson_id=self.lesson1.id, mood='cranky', score=90)
     self.lessonStudent2 = self.student1.lessonstudent_set.create(lesson_id=self.lesson2.id, mood='cranky', score=96)
