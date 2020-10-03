@@ -85,7 +85,6 @@ class LessonStudentModelTest(TestCase):
 
     self.student1 = StudentFactory()
     self.student2 = StudentFactory()
-    self.student3 = StudentFactory()
 
     self.lessonStudent1 = self.student1.lessonstudent_set.create(lesson_id=self.lesson1.id, mood='cranky', score=90)
     self.lessonStudent2 = self.student1.lessonstudent_set.create(lesson_id=self.lesson2.id, mood='cranky', score=96)
@@ -106,8 +105,8 @@ class LessonStudentModelTest(TestCase):
   def test_student_average_score(self):
     students = Student.ranked_by_average_score()
 
-    expected_students = [self.student1, self.student2]
+    expected_students = ["<Student: %s %s>" % (self.student1.first_name, self.student1.last_name), "<Student: %s %s>" % (self.student2.first_name, self.student2.last_name)]
 
-    self.assertEqual(students, expected_students)
+    self.assertQuerysetEqual(students, expected_students)
 
 
