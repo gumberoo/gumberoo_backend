@@ -103,7 +103,7 @@ class LessonStudentModelTest(TestCase):
     self.assertEqual(score, 76.0)
 
   def test_student_average_score(self):
-    students = Student.ranked_by_average_score()
+    students = Student.ranked_by_average_score(self.teacher1.id)
 
     expected_students = ["<Student: %s %s>" % (self.student1.first_name, self.student1.last_name), "<Student: %s %s>" % (self.student2.first_name, self.student2.last_name)]
 
