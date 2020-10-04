@@ -1,4 +1,4 @@
-from django.db.models.functions import Rank, RowNumber
+from django.db.models.functions import RowNumber
 from django.db.models.expressions import Window
 from django.db import models
 from django.db.models import Avg, F
