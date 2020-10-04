@@ -32,8 +32,8 @@ class Student(models.Model):
     return Student.objects.filter(teacher_id=teacher_id).annotate(
       average_score=Avg('lessonstudent__score'), 
       class_rank=Window(expression=RowNumber(), 
-      order_by=F('average_score').desc())).order_by('-average_score')
-    
+      order_by=F('average_score').desc())).order_by(F('average_score').desc(nulls_last=True))
+
 
 class Lesson(models.Model):
   name = models.CharField(max_length=100)
