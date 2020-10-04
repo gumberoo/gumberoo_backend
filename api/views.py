@@ -10,7 +10,7 @@ from django.db.models import Avg
 
 from api.models import Teacher, Lesson, LessonStudent, Student
 from api.popos import StudentScore, LessonScore, ZScore, ZScoreGenerator
-from api.serializers import TeacherSerializer, LessonSerializer, LessonStudentSerializer, StudentSerializer, StudentScoreSerializer, LessonScoreSerializer, ZScoreSerializer
+from api.serializers import TeacherSerializer, LessonSerializer, LessonStudentSerializer, StudentSerializer, StudentScoreSerializer, LessonScoreSerializer, ZScoreSerializer, StudentRankSerializer
 
 from . import watson_service
 
@@ -32,7 +32,7 @@ class TeacherStudent(APIView):
   def get(self, request, pk):
     students = Student.ranked_by_average_score(pk)
 
-    return Response(StudentSerializer(students, many=True).data)
+    return Response(StudentRankSerializer(students, many=True).data)
 
   def post(self, request, pk):
     teacher = Teacher.objects.get(pk=pk)
