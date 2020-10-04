@@ -252,8 +252,9 @@ class StatisticsSet(TestCase):
   def test_get_student_rank_for_all_students(self):
     response = self.client.get('/api/v1/teachers/%s/students/' % self.teacher1.id)
 
-    self.assertEqual(response.data[0]['rank'], 1)
-    self.assertEqual(response.data[1]['rank'], 1)
+    self.assertIsInstance(response.data[0]['class_rank'], int)
+    self.assertIsInstance(response.data[1]['class_rank'], int)
+    self.assertIsInstance(response.data[2]['class_rank'], int)
 
 
 class StudentLessonViewSet(TestCase):
