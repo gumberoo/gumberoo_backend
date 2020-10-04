@@ -17,6 +17,18 @@ class StudentSerializer(serializers.ModelSerializer):
         'teacher', 'id', 'first_name', 'last_name'
     )
 
+class StudentRankSerializer(serializers.ModelSerializer):
+  class_rank = serializers.SerializerMethodField()
+  class Meta:
+    model = Student
+    fields = (
+        'teacher', 'id', 'first_name', 'last_name', 'class_rank'
+    )
+
+  def get_class_rank(self, obj):
+    return obj.class_rank
+
+
 class AnswerSerializer(serializers.ModelSerializer):
   class Meta:
     model = Answer
