@@ -204,6 +204,7 @@ class StatisticsSet(TestCase):
     self.student1 = StudentFactory(teacher=self.teacher1)
     self.student2 = StudentFactory(teacher=self.teacher1)
     self.student3 = StudentFactory(teacher=self.teacher1)
+    self.student4 = StudentFactory(teacher=self.teacher1)
 
     self.lessonStudent1 = self.student1.lessonstudent_set.create(lesson_id=self.lesson1.id, mood='cranky', score=90)
     self.lessonStudent2 = self.student1.lessonstudent_set.create(lesson_id=self.lesson2.id, mood='cranky', score=96)
