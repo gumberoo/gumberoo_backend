@@ -1,5 +1,7 @@
+from django.db.models.functions import Rank, RowNumber
+from django.db.models.expressions import Window
 from django.db import models
-from django.db.models import Avg
+from django.db.models import Avg, F
 
 class Teacher(models.Model):
   first_name = models.CharField(max_length=30)
@@ -27,9 +29,12 @@ class Student(models.Model):
     return str(f'{self.first_name} {self.last_name}')
 
   def ranked_by_average_score(teacher_id):
-    return Student.objects.filter(teacher_id=teacher_id).annotate(average_score=Avg('lessonstudent__score')).order_by('-average_score')
-
-
+    return Student.objects.filter(teacher_id=teacher_id).annotate(
+      average_score=Avg('lessonstudent__score'), 
+      class_rank=Window(expression=Rank(), 
+      order_by=F('average_score').desc())).order_by('-average_score')
+    
+    
 class Lesson(models.Model):
   name = models.CharField(max_length=100)
   description = models.CharField(max_length=100)
