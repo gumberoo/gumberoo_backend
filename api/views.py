@@ -31,7 +31,6 @@ class TeacherStudent(APIView):
 
   def get(self, request, pk):
     students = Student.ranked_by_average_score(pk)
-
     return Response(StudentRankSerializer(students, many=True).data)
 
   def post(self, request, pk):
