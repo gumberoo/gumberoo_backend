@@ -167,13 +167,15 @@ To check if tests are passing, run `python ./manage.py test`
         "teacher": 1,   
         "id": 1,   
         "first_name": "newStudent1First",   
-        "last_name": "newStudent1Last"
+        "last_name": "newStudent1Last",
+        "class_rank": 1
     },   
     {   
         "teacher": 1,   
         "id": 2,   
         "first_name": "newStudent2First",   
-        "last_name": "newStudent2Last"
+        "last_name": "newStudent2Last",
+        "class_rank": 2
     }   
   ]     
  ```
