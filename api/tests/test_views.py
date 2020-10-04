@@ -201,9 +201,10 @@ class StatisticsSet(TestCase):
     self.answer7 = self.question4.answer_set.create(answer='answer3', correct=True)
     self.answer8 = self.question4.answer_set.create(answer='answer4', correct=False)
 
-    self.student1 = StudentFactory()
-    self.student2 = StudentFactory()
-    self.student3 = StudentFactory()
+    self.student1 = StudentFactory(teacher=self.teacher1)
+    self.student2 = StudentFactory(teacher=self.teacher1)
+    self.student3 = StudentFactory(teacher=self.teacher1)
+    self.student4 = StudentFactory(teacher=self.teacher1)
 
     self.lessonStudent1 = self.student1.lessonstudent_set.create(lesson_id=self.lesson1.id, mood='cranky', score=90)
     self.lessonStudent2 = self.student1.lessonstudent_set.create(lesson_id=self.lesson2.id, mood='cranky', score=96)
@@ -248,6 +249,14 @@ class StatisticsSet(TestCase):
     self.assertIsInstance(response.data[1]["zscore"], float)
     self.assertIsNotNone(response.data[2]["student_id"])
     self.assertIsInstance(response.data[2]["zscore"], float)
+
+  def test_get_student_rank_for_all_students(self):
+    response = self.client.get('/api/v1/teachers/%s/students/' % self.teacher1.id)
+
+    self.assertIsInstance(response.data[0]['class_rank'], int)
+    self.assertIsInstance(response.data[1]['class_rank'], int)
+    self.assertIsInstance(response.data[2]['class_rank'], int)
+
 
 class StudentLessonViewSet(TestCase):
   def setUp(self):
